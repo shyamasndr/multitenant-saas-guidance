@@ -109,8 +109,6 @@ namespace Tailspin.Surveys.Web
 
             // Register application services.
 
-            // This will register the default token storage.
-            services.AddTokenStorage();
             //Stack exchange client is only only supported in DNX451 at present
             //The custom RedisTokenCache built for this application uses the StackExchange client 
 #if DNX451
@@ -122,8 +120,7 @@ namespace Tailspin.Surveys.Web
             });
 
             // Replace the default token storage with a Redis-based version.
-            services.AddTokenStorage()
-                .UseRedisTokenStorageService();
+            services.AddRedisTokenStorage();
 #endif
 
             services.AddScoped<IAccessTokenService, AzureADTokenService>();
