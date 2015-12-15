@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
 using System.Threading.Tasks;
-using Microsoft.AspNet.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using StackExchange.Redis;
-using Microsoft.Extensions.DependencyInjection;
 using Tailspin.Surveys.Common;
 
 namespace Tailspin.Surveys.TokenStorage.Redis
@@ -53,7 +51,12 @@ namespace Tailspin.Surveys.TokenStorage.Redis
 
             return await Task.FromResult(_cache);
         }
-
+        /// <summary>
+        /// Clears the token cache for the user and client
+        /// </summary>
+        /// <param name="userObjectId"></param>
+        /// <param name="clientId"></param>
+        /// <returns></returns>
         public async Task ClearCacheAsync(string userObjectId, string clientId)
         {
             var cache = await GetCacheAsync(userObjectId, clientId);

@@ -49,14 +49,12 @@ namespace Tailspin.Surveys.Web
 
             // Uncomment the block of code below if you want to load secrets from KeyVault
             // It is recommended to use certs for all authentication when using KeyVault
-//#if DNX451
 //            _configuration = builder.Build();
 //            builder.AddKeyVaultSecrets(_configuration["AzureAd:ClientId"],
 //                _configuration["KeyVault:Name"],
 //                _configuration["AzureAd:Asymmetric:CertificateThumbprint"],
 //                Convert.ToBoolean(_configuration["AzureAd:Asymmetric:ValidationRequired"]),
 //                loggerFactory);
-//#endif
 
             _configuration = builder.Build();
         }
@@ -111,7 +109,7 @@ namespace Tailspin.Surveys.Web
 
             //Stack exchange client is only only supported in DNX451 at present
             //The custom RedisTokenCache built for this application uses the StackExchange client 
-#if DNX451
+            //TODO - Add DNXCORE support when this issue is resolved https://github.com/StackExchange/StackExchange.Redis/issues/317
             services.AddRedisConnection(options =>
             {
                 options.AddEndpoint(configOptions.Redis.Endpoint)
@@ -121,7 +119,6 @@ namespace Tailspin.Surveys.Web
 
             // Replace the default token storage with a Redis-based version.
             services.AddRedisTokenStorage();
-#endif
 
             services.AddScoped<IAccessTokenService, AzureADTokenService>();
             services.AddSingleton<HttpClientService>();
