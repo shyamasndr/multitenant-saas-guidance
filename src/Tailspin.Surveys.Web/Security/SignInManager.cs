@@ -39,7 +39,7 @@ namespace Tailspin.Surveys.Web.Security
         }
 
         /// <summary>
-        /// Signs the currently signed in principal out of all authentication schemes and clears any access tokens from the token cache.
+        /// Signs the currently signed in principal out of all authentication schemes
         /// </summary>
         /// <param name="redirectUrl">A Url to which the user should be redirected when sign out of AAD completes.</param>
         /// <returns>A <see cref="System.Threading.Tasks.Task{Microsoft.AspNet.Mvc.IActionResult}"/> implementation.</returns>
@@ -56,8 +56,6 @@ namespace Tailspin.Surveys.Web.Security
 
                 await _httpContext.Authentication.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme,
                     new AuthenticationProperties { RedirectUri = redirectUrl });
-
-                await _accessTokenService.ClearCacheAsync(_httpContext.User);
 
                 _logger.SignoutCompleted(userObjectIdentifier, issuer);
             }

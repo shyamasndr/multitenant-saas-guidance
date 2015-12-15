@@ -15,6 +15,7 @@ using Tailspin.Surveys.Common.Configuration;
 using Tailspin.Surveys.Data.DataModels;
 using Tailspin.Surveys.Security;
 using Tailspin.Surveys.Web.Logging;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 namespace Tailspin.Surveys.Web.Security
 {
@@ -218,13 +219,28 @@ namespace Tailspin.Surveys.Web.Security
                     await CreateOrUpdateUserAsync(context.AuthenticationTicket, userManager, tenant)
                         .ConfigureAwait(false);
 
-                    // We are good, so cache our token for Web Api now.
-                    await accessTokenService.RequestAccessTokenAsync(
-                        principal,
-                        context.ProtocolMessage.Code,
-                        context.AuthenticationTicket.Properties.Items[OpenIdConnectDefaults.RedirectUriForCodePropertiesKey],
-                        _adOptions.WebApiResourceId)
-                        .ConfigureAwait(false);
+                    string token = "";
+                    try
+                    {
+                        // Try retrieving the access token for the WebAPI resource from cache
+                        token = await accessTokenService.GetTokenForWebApiAsync(principal);
+                    }
+                    catch(AuthenticationException ex)
+                    {
+                        // Access token was not found in cache. Log the error 
+                        _logger.TokenNotFoundInCache(principal.GetObjectIdentifierValue(), issuerValue, ex);
+                    }
+
+                    // Retrieve access token using an authorization code if the token was not found in cache
+                    if (string.IsNullOrWhiteSpace(token))
+                    {
+                        await accessTokenService.RequestAccessTokenAsync(
+                            principal,
+                            context.ProtocolMessage.Code,
+                            context.AuthenticationTicket.Properties.Items[OpenIdConnectDefaults.RedirectUriForCodePropertiesKey],
+                            _adOptions.WebApiResourceId)
+                            .ConfigureAwait(false);
+                    }
                 }
 
             }

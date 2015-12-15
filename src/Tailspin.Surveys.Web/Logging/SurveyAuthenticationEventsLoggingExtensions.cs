@@ -51,5 +51,11 @@ namespace Tailspin.Surveys.Web.Logging
         {
             logger.LogError(string.Format(CultureInfo.InvariantCulture, "Tenant SignUp request failed for User: {0} of Issuer: {1}", userId, issuer), exp);
         }
+
+        public static void TokenNotFoundInCache(this ILogger logger, string userId, string issuer, Exception exp)
+        {
+            logger.LogError(string.Format(CultureInfo.InvariantCulture, "Access token not found in cache for User: {0} of Issuer: {1}", userId, issuer), exp);
+        }
+        
     }
 }
