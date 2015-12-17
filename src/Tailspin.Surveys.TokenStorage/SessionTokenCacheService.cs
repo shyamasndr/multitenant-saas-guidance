@@ -33,9 +33,9 @@ namespace Tailspin.Surveys.TokenStorage
         /// <param name="userObjectId">Azure Active Directory user's ObjectIdentifier.</param>
         /// <param name="clientId">Azure Active Directory ApplicationId.</param>
         /// <returns>An instance of <see cref="Microsoft.IdentityModel.Clients.ActiveDirectory.TokenCache"/>.</returns>
-        public override Task<TokenCache> GetCacheAsync(string userObjectId, string clientId)
+        public override Task<TokenCache> GetCacheAsync(ClaimsPrincipal principal)
         {
-            if (!_contextAccessor.HttpContext.User.IsSignedInToApplication())
+            if (!principal.IsSignedInToApplication())
             {
                 throw new InvalidOperationException("User needs to be authenticated first");
             }
