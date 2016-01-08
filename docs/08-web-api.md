@@ -63,14 +63,14 @@ In order for Azure AD to issue a bearer token for the web API, you need to confi
 
 ## Getting an access token
 
-Before calling the web API, the web application must get an access token from Azure AD. In a .NET application, use the [Azure AD Authentication Library (ADAL) for .NET](https://msdn.microsoft.com/en-us/library/azure/jj573266.aspx).
+Before calling the web API, the web application must get an access token from Azure AD. In a .NET application, use the [Azure AD Authentication Library (ADAL) for .NET][ADAL].
 
-The following code gets the access token, using delegated user identity. This code requires the OAuth 2 access code, which the application gets during authentication.
+The following code calls ADAL to get an access token, using delegated user identity. This code requires the OAuth 2 access code, which the application gets during authentication.
 
     string authority = "https://login.microsoftonline.com/" + tenantID
     string resourceID = "https://tailspin.onmicrosoft.com/survey.webapi" // App ID URI
     ClientCredential credential = new ClientCredential(clientId, clientSecret);
-    AuthenticationContext authContext = new AuthenticationContext(authority, tokenCache);
+    AuthenticationContext context = new AuthenticationContext(authority, tokenCache);
     AuthenticationResult authResult = await authContext.AcquireTokenByAuthorizationCodeAsync(
         authorizationCode, new Uri(redirectUri), credential, resourceID);
 
@@ -82,7 +82,9 @@ Here are the various parameters that are needed:
 - `clientSecret`. The web application's client secret.
 - `redirectUri`. The redirect URI that you set for OpenID connect. This is where the IDP calls back with the token.
 - `resourceID`. The App ID URI of the web API, which you created when you registered the web API in Azure AD
-- `tokenCache`. An object that caches the access tokens. See [TODO] for more information.
+- `tokenCache`. An object that caches the access tokens. See [Token caching](#token-caching).
+
+<!--- Here talk about the credentials abstraction -->
 
 ## Using the access token to call the web API
 
@@ -116,7 +118,7 @@ The following code from the Surveys application shows how to set the Authorizati
 
 ## Authenticating in the web API
 
-The web API has to authenticate the bearer token. In ASP.NET 5, you can use the [Microsoft.AspNet.Authentication.JwtBearer](https://www.nuget.org/packages/Microsoft.AspNet.Authentication.JwtBearer) package. This package provides middleware that enables the application to receive OpenID Connect bearer tokens.
+The web API has to authenticate the bearer token. In ASP.NET 5, you can use the [Microsoft.AspNet.Authentication.JwtBearer][JwtBearer] package. This package provides middleware that enables the application to receive OpenID Connect bearer tokens.
 
 Register the middleware in your web API `Startup` class.
 
@@ -192,6 +194,16 @@ This returns a 401 status code if the user is not authenticated, and 403 if the 
                 });
         });
 
-## Additional Resources
 
-- [Authentication Scenarios for Azure AD](https://azure.microsoft.com/en-us/documentation/articles/active-directory-authentication-scenarios/#web-application-to-web-api)
+## Additional resources
+
+- [Authentication Scenarios for Azure AD][auth-scenarios]
+
+<!-- links -->
+
+[ADAL]: https://msdn.microsoft.com/en-us/library/azure/jj573266.aspx
+[auth-scenarios]: https://azure.microsoft.com/en-us/documentation/articles/active-directory-authentication-scenarios/#web-application-to-web-api
+[data-protection]: https://docs.asp.net/en/latest/security/data-protection/index.html
+[JwtBearer]: https://www.nuget.org/packages/Microsoft.AspNet.Authentication.JwtBearer
+[key-management]: https://docs.asp.net/en/latest/security/data-protection/configuration/default-settings.html
+[key-encryption]: https://docs.asp.net/en/latest/security/data-protection/implementation/key-encryption-at-rest.html#x-509-certificate
