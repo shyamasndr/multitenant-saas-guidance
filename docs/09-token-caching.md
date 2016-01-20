@@ -8,7 +8,7 @@ ADAL provides a default token cache implementation. However, this token cache is
 -	It doesn't scale to large numbers of users, because tokens from all users go into the same dictionary.
 -	It can't be shared across web servers in a farm.
 
-Instead, you should implement a custom token cache that derives from the ADAL `TokenCache` class but is suitable for a server environment.
+Instead, you should implement a custom token cache that derives from the ADAL `TokenCache` class but is suitable for a server environment and provides the desirable level of isolation between tokens for different users.
 
 The `TokenCache` class stores a dictionary of tokens, indexed by issuer, resource, client ID, and user. A custom token cache will read/write this dictionary to a backing store, such as a Redis cache.
 
@@ -23,12 +23,12 @@ In the Tailspin Surveys application, the `DistributedTokenCache` class implement
 
 ![Token cache](media/token-caching/token-cache.png)
 
-This approach scales to many users, because only tokens for the current user are loaded into applicaton memory. Also, if Redis is used as the backing store, you can deploy to server farm and every server instance will read/write to the same cache.
+The tokens are read from the backing store and loaded into a separate dictionary for each user every time there is a new request from the user's browser. Also, if Redis is used as the backing store, you can deploy to server farm and every server instance will read/write to the same cache and this approach scales to many users.
 
 ## Encrypting cached tokens
 
 Tokens are sensitive data, because they grant access to a user's resources. Therefore, it's critical to protect them from being compromised.
-The Redis-backed cache is protected by a password, but if someone obtains the password, they could get all of the cached access tokens. (Moreover, tokens can't be hashed, unlike passwords.) For that reason, the `DistributedTokenCache` encrypts everything that it writes to the session. Encryption is done using the ASP.NET 5 [data protection][data-protection] APIs.
+The Redis-backed cache is protected by a password, but if someone obtains the password, they could get all of the cached access tokens. (Moreover, tokens can't be hashed, unlike passwords.) For that reason, the `DistributedTokenCache` encrypts everything that it writes to the backing store. Encryption is done using the ASP.NET 5 [data protection][data-protection] APIs.
 
 > If you deploy to Azure Web Sites, the encryption keys are backed up to network storage and synchronized across all machines (see [Key Management][key-management]). By default, keys are not encrypted when running in Azure Web Sites, but you can [enable encryption using an X.509 certificate][x509-cert-encryption].
 
