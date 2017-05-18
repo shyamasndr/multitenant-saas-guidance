@@ -19,6 +19,7 @@ using System.Security;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using System.Globalization;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Tailspin.Surveys.Web.Security
 {
