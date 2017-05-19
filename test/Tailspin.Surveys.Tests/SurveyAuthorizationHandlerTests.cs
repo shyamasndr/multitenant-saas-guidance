@@ -245,7 +245,7 @@ namespace MultiTentantSurveyAppTests
         private static Mock<ILogger> _logger = new Mock<ILogger>();
         public TestableSurveyAuthorizationHandler():base(_logger.Object)
         {}
-        internal new void Handle(AuthorizationHandlerContext context, OperationAuthorizationRequirement operation, Survey resource)
+        internal void Handle(AuthorizationHandlerContext context, OperationAuthorizationRequirement operation, Survey resource)
         {
             base.HandleRequirementAsync(context, operation, resource);
         }
