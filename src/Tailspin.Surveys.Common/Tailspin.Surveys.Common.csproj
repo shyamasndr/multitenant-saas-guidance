@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Tailspin.Surveys.Common Class Library</Description>
-    <TargetFrameworks>net451;netcoreapp1.0</TargetFrameworks>
+    <TargetFrameworks>netstandard16</TargetFrameworks>
     <AssemblyName>Tailspin.Surveys.Common</AssemblyName>
     <PackageId>Tailspin.Surveys.Common</PackageId>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">$(PackageTargetFallback);dotnet5.6;dnxcore50;portable-net45+win8</PackageTargetFallback>
