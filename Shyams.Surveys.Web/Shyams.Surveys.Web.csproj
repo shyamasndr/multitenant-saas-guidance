@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -9,6 +9,158 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="bower.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="package.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Home\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\Error.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\Forbidden.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\_Layout.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\_LoginPartial.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\_QuestionEditPartial.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\_SurveyDetailPartial.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\_ValidationPartial.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\_ValidationScriptsPartial.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Survey\Contributors.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Survey\Create.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Survey\Delete.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Survey\DeleteResult.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Survey\Details.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Survey\Edit.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Survey\EditTitle.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Survey\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Survey\ListPerTenant.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Survey\Publish.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Survey\PublishResult.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Survey\RequestContributor.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Survey\UnPublish.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Survey\UnPublishResult.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\_ViewImports.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\_ViewStart.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="web.config">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Account\ExternalLoginFailure.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Account\ExternalLoginFailure.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Account\Lockout.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Account\SignupSuccess.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Home\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Question\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Question\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Question\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\_ConfirmPartial.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Account\Lockout.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Account\SignupSuccess.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Home\Details.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Question\Create.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Question\Delete.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Question\Edit.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shared\_ConfirmPartial.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shyams.Surveys.Common\Shyams.Surveys.Common.csproj" />
+    <ProjectReference Include="..\Shyams.Surveys.Data\Shyams.Surveys.Data.csproj" />
+    <ProjectReference Include="..\Shyams.Surveys.Security\Shyams.Surveys.Security.csproj" />
+    <ProjectReference Include="..\Shyams.Surveys.TokenStorage\Shyams.Surveys.TokenStorage.csproj" />
   </ItemGroup>
 
 </Project>
