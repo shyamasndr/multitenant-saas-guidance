@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shyams.Surveys.Common\Shyams.Surveys.Common.csproj" />
+    <ProjectReference Include="..\Shyams.Surveys.Data\Shyams.Surveys.Data.csproj" />
+	  <PackageReference Include="Microsoft.Extensions.Logging" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.2.0" />
+
+  </ItemGroup>
+
+</Project>
