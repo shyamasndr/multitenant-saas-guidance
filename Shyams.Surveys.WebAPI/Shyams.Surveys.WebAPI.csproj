@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -8,6 +8,12 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shyams.Surveys.Common\Shyams.Surveys.Common.csproj" />
+    <ProjectReference Include="..\Shyams.Surveys.Data\Shyams.Surveys.Data.csproj" />
+    <ProjectReference Include="..\Shyams.Surveys.Security\Shyams.Surveys.Security.csproj" />
   </ItemGroup>
 
 </Project>
