@@ -107,6 +107,30 @@ namespace Tailspin.Surveys.Web
             services.AddEntityFrameworkSqlServer()
                 .AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetSection("Data")["SurveysConnectionString"]));
 
+
+
+            services.AddAuthentication(x => { x.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme; }).AddOpenIdConnect(x =>
+            {
+                x.ClientId = configOptions.AzureAd.ClientId;
+                x.ClientSecret = configOptions.AzureAd.ClientSecret; // for code flow
+                x.Authority = Constants.AuthEndpointPrefix;
+                x.ResponseType = OpenIdConnectResponseType.CodeIdToken;
+                x.SignedOutRedirectUri = configOptions.AzureAd.PostLogoutRedirectUri;
+                x.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                x.TokenValidationParameters = new TokenValidationParameters { ValidateIssuer = false };
+                x.Events = new SurveyAuthenticationEvents(configOptions.AzureAd);
+
+            }).AddCookie(x =>
+            {
+                x.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                x.AccessDeniedPath = "/Home/Forbidden";
+                // The default setting for cookie expiration is 14 days. SlidingExpiration is set to true by default
+                x.ExpireTimeSpan = TimeSpan.FromHours(1);
+                x.SlidingExpiration = true;
+            });
+
+
+
             // Add MVC services to the services container.
             services.AddMvc();
 
@@ -157,28 +181,28 @@ namespace Tailspin.Surveys.Web
             app.UseStaticFiles();
 
             // Add cookie-based authentication to the request pipeline.
-            app.UseCookieAuthentication(new CookieAuthenticationOptions {
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true,
-                AccessDeniedPath = "/Home/Forbidden",
-                CookieSecure = CookieSecurePolicy.Always,
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions {
+            //    AutomaticAuthenticate = true,
+            //    AutomaticChallenge = true,
+            //    AccessDeniedPath = "/Home/Forbidden",
+            //    CookieSecure = CookieSecurePolicy.Always,
 
-                // The default setting for cookie expiration is 14 days. SlidingExpiration is set to true by default
-                ExpireTimeSpan = TimeSpan.FromHours(1),
-                SlidingExpiration = true
-            });
+            //    // The default setting for cookie expiration is 14 days. SlidingExpiration is set to true by default
+            //    ExpireTimeSpan = TimeSpan.FromHours(1),
+            //    SlidingExpiration = true
+            //});
 
             // Add OpenIdConnect middleware so you can login using Azure AD.
-            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions {
-                ClientId = configOptions.AzureAd.ClientId,
-                ClientSecret = configOptions.AzureAd.ClientSecret, // for code flow
-                Authority = Constants.AuthEndpointPrefix,
-                ResponseType = OpenIdConnectResponseType.CodeIdToken,
-                PostLogoutRedirectUri = configOptions.AzureAd.PostLogoutRedirectUri,
-                SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme,
-                TokenValidationParameters = new TokenValidationParameters { ValidateIssuer = false },
-                Events = new SurveyAuthenticationEvents(configOptions.AzureAd, loggerFactory),
-            });
+            //app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions {
+            //    ClientId = configOptions.AzureAd.ClientId,
+            //    ClientSecret = configOptions.AzureAd.ClientSecret, // for code flow
+            //    Authority = Constants.AuthEndpointPrefix,
+            //    ResponseType = OpenIdConnectResponseType.CodeIdToken,
+            //    PostLogoutRedirectUri = configOptions.AzureAd.PostLogoutRedirectUri,
+            //    SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme,
+            //    TokenValidationParameters = new TokenValidationParameters { ValidateIssuer = false },
+            //    Events = new SurveyAuthenticationEvents(configOptions.AzureAd, loggerFactory),
+            //});
 
             app.UseAuthentication();
             // Add MVC to the request pipeline.

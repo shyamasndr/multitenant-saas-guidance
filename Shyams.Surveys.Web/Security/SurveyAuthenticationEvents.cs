@@ -42,6 +42,17 @@ namespace Tailspin.Surveys.Web.Security
             _logger = loggerFactory.CreateLogger<SurveyAuthenticationEvents>();
         }
 
+
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="Tailspin.Surveys.Web.Security.SurveyAuthenticationEvents"/>.
+        /// </summary>
+        /// <param name="adOptions">Application settings related to Azure Active Directory.</param>
+        /// <param name="loggerFactory"><see cref="Microsoft.Extensions.Logging.ILoggerFactory"/> used to create type-specific <see cref="Microsoft.Extensions.Logging.ILogger"/> instances.</param>
+        public SurveyAuthenticationEvents(AzureAdOptions adOptions)
+        {
+            _adOptions = adOptions;
+        }
         /// <summary>
         /// Called prior to the OIDC middleware redirecting to the authentication endpoint.  In the event we are signing up a tenant, we need to
         /// put the "admin_consent" value for the prompt query string parameter.  AAD uses this to show the admin consent flow.
@@ -95,12 +106,12 @@ namespace Tailspin.Surveys.Web.Security
             }
         }
 
-        private async Task<Tenant> SignUpTenantAsync(BaseControlContext context, TenantManager tenantManager)
+        private async Task<Tenant> SignUpTenantAsync(TokenValidatedContext context, TenantManager tenantManager)
         {
             Guard.ArgumentNotNull(context, nameof(context));
             Guard.ArgumentNotNull(tenantManager, nameof(tenantManager));
 
-            var principal = context.Ticket.Principal;
+            var principal = context.Principal;
             var issuerValue = principal.GetIssuerValue();
             var tenant = new Tenant
             {
@@ -190,7 +201,7 @@ namespace Tailspin.Surveys.Web.Security
         /// <returns>a completed <see cref="System.Threading.Tasks.Task"/></returns>
         public override async Task TokenValidated(TokenValidatedContext context)
         {
-            var principal = context.Ticket.Principal;
+            var principal = context.Principal;
             var userId = principal.GetObjectIdentifierValue();
             var tenantManager = context.HttpContext.RequestServices.GetService<TenantManager>();
             var userManager = context.HttpContext.RequestServices.GetService<UserManager>();

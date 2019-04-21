@@ -3,6 +3,7 @@
 
 using System;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Tailspin.Surveys.Common;
 
 namespace Tailspin.Surveys.Web.Security
@@ -17,13 +18,13 @@ namespace Tailspin.Surveys.Web.Security
         /// </summary>
         /// <param name="context">BaseControlContext from ASP.NET.</param>
         /// <returns>true if the user is signing up a tenant, otherwise, false.</returns>
-        internal static bool IsSigningUp(this BaseControlContext context)
+        internal static bool IsSigningUp(this RedirectContext context)
         {
             Guard.ArgumentNotNull(context, nameof(context));
 
             string signupValue;
             // Check the HTTP context and convert to string
-            if ((context.Ticket == null) ||
+            if ((context.Options. == null) ||
                 (!context.Ticket.Properties.Items.TryGetValue("signup", out signupValue)))
             {
                 return false;
