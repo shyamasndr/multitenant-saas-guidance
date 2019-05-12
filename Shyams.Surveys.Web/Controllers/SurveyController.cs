@@ -6,7 +6,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Tailspin.Surveys.Data.DataModels;
@@ -19,6 +18,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System;
 using System.Linq;
 using Tailspin.Surveys.Web.Security;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Tailspin.Surveys.Web.Controllers
 {

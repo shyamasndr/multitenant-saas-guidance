@@ -133,7 +133,7 @@ namespace Tailspin.Surveys.Web.Security
             return tenant;
         }
 
-        private async Task CreateOrUpdateUserAsync(AuthenticationTicket authenticationTicket, UserManager userManager, Tenant tenant)
+        private async Task CreateOrUpdateUserAsync(TokenValidatedContext authenticationTicket, UserManager userManager, Tenant tenant)
         {
             Guard.ArgumentNotNull(authenticationTicket, nameof(authenticationTicket));
             Guard.ArgumentNotNull(userManager, nameof(userManager));
@@ -225,7 +225,7 @@ namespace Tailspin.Surveys.Web.Security
                 }
 
                 // In this case, we need to go ahead and set up the user signing us up.
-                await CreateOrUpdateUserAsync(context.Ticket, userManager, tenant)
+                await CreateOrUpdateUserAsync(context, userManager, tenant)
                     .ConfigureAwait(false);
             }
             else
@@ -236,7 +236,7 @@ namespace Tailspin.Surveys.Web.Security
                     throw new SecurityTokenValidationException($"Tenant {issuerValue} is not registered");
                 }
 
-                await CreateOrUpdateUserAsync(context.Ticket, userManager, tenant)
+                await CreateOrUpdateUserAsync(context, userManager, tenant)
                     .ConfigureAwait(false);
             }
         }
@@ -254,7 +254,7 @@ namespace Tailspin.Surveys.Web.Security
 
         public override async Task AuthorizationCodeReceived(AuthorizationCodeReceivedContext context)
         {
-            var principal = context.Ticket.Principal;
+            var principal = context.Principal;
 
             //
             var request = context.HttpContext.Request;

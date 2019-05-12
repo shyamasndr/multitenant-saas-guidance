@@ -29,9 +29,8 @@ namespace Tailspin.Surveys.Web
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env, ILoggingBuilder loggingBuilder)
+        public Startup(IHostingEnvironment env, ILogger<Startup> logger)
         {
-            InitializeLogging(loggingBuilder);
 
             // Setup configuration sources.
             var builder = new ConfigurationBuilder()
@@ -39,14 +38,7 @@ namespace Tailspin.Surveys.Web
                 .AddJsonFile("appsettings.json")
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
-            if (env.IsDevelopment())
-            {
-                // This reads the configuration keys from the secret store.
-                // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
-                builder.AddUserSecrets<Startup>();
-            }
-
-            builder.AddEnvironmentVariables();
+           
 
             // Uncomment the block of code below if you want to load secrets from KeyVault
             // It is recommended to use certs for all authentication when using KeyVault
@@ -64,7 +56,9 @@ namespace Tailspin.Surveys.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<SurveyAppConfiguration.ConfigurationOptions>(options => Configuration.Bind(options));
+            services.Configure<SurveyAppConfiguration.ConfigurationOptions>(
+                options => Configuration.Bind(options)
+                );
 
             var configOptions = new SurveyAppConfiguration.ConfigurationOptions();
             Configuration.Bind(configOptions);
@@ -217,10 +211,6 @@ namespace Tailspin.Surveys.Web
             });
         }
 
-        private void InitializeLogging(ILoggingBuilder builder)
-        {
-            builder.AddDebug();
-            builder.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Information);
-        }
+      
     }
 }

@@ -24,8 +24,32 @@ namespace Tailspin.Surveys.Web.Security
 
             string signupValue;
             // Check the HTTP context and convert to string
-            if ((context.Options. == null) ||
-                (!context.Ticket.Properties.Items.TryGetValue("signup", out signupValue)))
+            if ((context.Properties.GetParameter<string>("signup") == null) ||
+                (!context.Properties.Items.TryGetValue("signup", out signupValue)))
+            {
+                return false;
+            }
+
+            // We have found the value, so see if it's valid
+            bool isSigningUp;
+            if (!bool.TryParse(signupValue, out isSigningUp))
+            {
+                // The value for signup is not a valid boolean, throw                
+                throw new InvalidOperationException($"'{signupValue}' is an invalid boolean value");
+            }
+
+            return isSigningUp;
+        }
+
+
+        internal static bool IsSigningUp(this TokenValidatedContext context)
+        {
+            Guard.ArgumentNotNull(context, nameof(context));
+
+            string signupValue;
+            // Check the HTTP context and convert to string
+            if ((context.Properties.GetParameter<string>("signup") == null) ||
+                (!context.Properties.Items.TryGetValue("signup", out signupValue)))
             {
                 return false;
             }
