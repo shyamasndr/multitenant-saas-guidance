@@ -24,7 +24,7 @@ namespace Tailspin.Surveys.Web.Security
 
             string signupValue;
             // Check the HTTP context and convert to string
-            if ((context.Properties.GetParameter<string>("signup") == null) ||
+            if ((context== null) ||
                 (!context.Properties.Items.TryGetValue("signup", out signupValue)))
             {
                 return false;

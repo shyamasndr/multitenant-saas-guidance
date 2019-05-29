@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
@@ -25,8 +26,13 @@ namespace Tailspin.Surveys.Web.Controllers
         /// This action provides the Home experience.
         /// </summary>
         /// <returns>A view that shows all the published <see cref="Tailspin.Surveys.Data.DataModels.Survey"/>s.</returns>
+        
         public async Task<IActionResult> Index()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
             var result = await _surveyService.GetPublishedSurveysAsync();
             if (result.Succeeded)
             {

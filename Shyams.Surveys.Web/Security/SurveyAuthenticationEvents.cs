@@ -49,9 +49,10 @@ namespace Tailspin.Surveys.Web.Security
         /// </summary>
         /// <param name="adOptions">Application settings related to Azure Active Directory.</param>
         /// <param name="loggerFactory"><see cref="Microsoft.Extensions.Logging.ILoggerFactory"/> used to create type-specific <see cref="Microsoft.Extensions.Logging.ILogger"/> instances.</param>
-        public SurveyAuthenticationEvents(AzureAdOptions adOptions)
+        public SurveyAuthenticationEvents(AzureAdOptions adOptions, ILogger logger)
         {
             _adOptions = adOptions;
+            _logger = logger;
         }
         /// <summary>
         /// Called prior to the OIDC middleware redirecting to the authentication endpoint.  In the event we are signing up a tenant, we need to
