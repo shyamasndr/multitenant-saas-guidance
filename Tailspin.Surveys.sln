@@ -23,17 +23,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tailspin.Surveys.Common", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tailspin.Surveys.Security", "src\Tailspin.Surveys.Security\Tailspin.Surveys.Security.csproj", "{06CDE42E-22B9-4E48-BAB8-8E26BA8B5A21}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shyams.Surveys.Web", "Shyams.Surveys.Web\Shyams.Surveys.Web.csproj", "{05839A83-9E6E-4BF0-BB44-6159224A5946}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shyams.Surveys.Web", "src\Shyams.Surveys.Web\Shyams.Surveys.Web.csproj", "{05839A83-9E6E-4BF0-BB44-6159224A5946}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shyams.Surveys.WebAPI", "Shyams.Surveys.WebAPI\Shyams.Surveys.WebAPI.csproj", "{350337EB-4D8F-4AE3-BEA4-6C378B9F4B88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shyams.Surveys.WebAPI", "src\Shyams.Surveys.WebAPI\Shyams.Surveys.WebAPI.csproj", "{350337EB-4D8F-4AE3-BEA4-6C378B9F4B88}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shyams.Surveys.Common", "Shyams.Surveys.Common\Shyams.Surveys.Common.csproj", "{D9F9EE3C-66BA-4BC1-8E24-BCFCC1B0A2A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shyams.Surveys.Common", "src\Shyams.Surveys.Common\Shyams.Surveys.Common.csproj", "{D9F9EE3C-66BA-4BC1-8E24-BCFCC1B0A2A1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shyams.Surveys.Data", "Shyams.Surveys.Data\Shyams.Surveys.Data.csproj", "{6BD97809-E2A9-4CF7-B23A-1E65181EE6BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shyams.Surveys.Data", "src\Shyams.Surveys.Data\Shyams.Surveys.Data.csproj", "{6BD97809-E2A9-4CF7-B23A-1E65181EE6BA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shyams.Surveys.Security", "Shyams.Surveys.Security\Shyams.Surveys.Security.csproj", "{67DF4982-40D4-465B-8AFE-2D05025C0DD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shyams.Surveys.Security", "src\Shyams.Surveys.Security\Shyams.Surveys.Security.csproj", "{67DF4982-40D4-465B-8AFE-2D05025C0DD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shyams.Surveys.TokenStorage", "Shyams.Surveys.TokenStorage\Shyams.Surveys.TokenStorage.csproj", "{6B456FC5-DF32-4ED8-9F60-075166F0B479}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shyams.Surveys.TokenStorage", "src\Shyams.Surveys.TokenStorage\Shyams.Surveys.TokenStorage.csproj", "{6B456FC5-DF32-4ED8-9F60-075166F0B479}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

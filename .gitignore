@@ -4,7 +4,8 @@
 /artifacts
 /src/Tailspin.Surveys.Web/node_modules
 /src/Tailspin.Surveys.Web/wwwroot/lib
-
+/src/Shyams.Surveys.Web/wwwroot/lib
+/src/Shyams.Surveys.Web/node_modules
 bin/
 obj/
 
@@ -13,3 +14,4 @@ obj/
 
 # see https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 project.lock.json
+
