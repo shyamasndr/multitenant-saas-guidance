@@ -8,9 +8,22 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
+    
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Authentication.Core" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+    
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.2.0" />
+    
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="2.2.1" />
+    
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
   </ItemGroup>
 
 
@@ -158,6 +171,10 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\aspnet.security\Microsoft.AspNetCore.Authentication.Cookies\Microsoft.AspNetCore.Authentication.Cookies.csproj" />
+    <ProjectReference Include="..\aspnet.security\Microsoft.AspNetCore.Authentication.OAuth\Microsoft.AspNetCore.Authentication.OAuth.csproj" />
+    <ProjectReference Include="..\aspnet.security\Microsoft.AspNetCore.Authentication.OpenIdConnect\Microsoft.AspNetCore.Authentication.OpenIdConnect.csproj" />
+    <ProjectReference Include="..\aspnet.security\Microsoft.AspNetCore.Authentication\Microsoft.AspNetCore.Authentication.csproj" />
     <ProjectReference Include="..\Shyams.Surveys.Common\Shyams.Surveys.Common.csproj" />
     <ProjectReference Include="..\Shyams.Surveys.Data\Shyams.Surveys.Data.csproj" />
     <ProjectReference Include="..\Shyams.Surveys.Security\Shyams.Surveys.Security.csproj" />

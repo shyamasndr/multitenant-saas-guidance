@@ -108,7 +108,7 @@ namespace Tailspin.Surveys.Web
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-               
+
             })
             .AddOpenIdConnect(x =>
             {
@@ -119,16 +119,16 @@ namespace Tailspin.Surveys.Web
                 x.SignedOutRedirectUri = configOptions.AzureAd.PostLogoutRedirectUri;
                 x.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 x.TokenValidationParameters = new TokenValidationParameters { ValidateIssuer = false };
-                x.Events = new SurveyAuthenticationEvents(configOptions.AzureAd,logger);
+                x.Events = new SurveyAuthenticationEvents(configOptions.AzureAd, logger);
                 //x.MetadataAddress = "https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration";
             })
             .AddCookie(x =>
             {
-              x.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-              x.AccessDeniedPath = "/Home/Forbidden";
-              // The default setting for cookie expiration is 14 days. SlidingExpiration is set to true by default
-              x.ExpireTimeSpan = TimeSpan.FromHours(1);
-              x.SlidingExpiration = true;
+                x.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                x.AccessDeniedPath = "/Home/Forbidden";
+                // The default setting for cookie expiration is 14 days. SlidingExpiration is set to true by default
+                x.ExpireTimeSpan = TimeSpan.FromHours(1);
+                x.SlidingExpiration = true;
             });
 
 
